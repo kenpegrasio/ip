@@ -1,8 +1,10 @@
 import java.util.Scanner;
+import java.util.Vector;
 
 public class GoldenTrace {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Vector<String> tasks = new Vector<>();
 
         /* Greeting */
         String logo =
@@ -20,9 +22,21 @@ public class GoldenTrace {
         /* Conversation block */
         String line = scanner.nextLine();
         while (!line.equals("bye")) {
-            System.out.println("    ____________________________________________________________\n");
-            System.out.println("    " + line);
-            System.out.println("    ____________________________________________________________\n");
+            if (line.equals("list")) {
+                System.out.println("    ____________________________________________________________\n");
+                int counter = 1;
+                for (String task : tasks) {
+                    System.out.println("    " + counter + ". " + task);
+                    counter++;
+                }
+                System.out.println("    ____________________________________________________________\n");
+            } 
+            else {
+                System.out.println("    ____________________________________________________________\n");
+                System.out.println("    added: " + line);
+                System.out.println("    ____________________________________________________________\n");
+                tasks.add(line);
+            }
             line = scanner.nextLine();
         }
 
