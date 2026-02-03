@@ -1,10 +1,10 @@
 import java.util.Scanner;
-import java.util.Vector;
 
 public class GoldenTrace {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Vector<String> tasks = new Vector<>();
+        Task[] tasks = new Task[100];
+        int numberOfTasks = 0;
 
         /* Greeting */
         String logo =
@@ -22,20 +22,51 @@ public class GoldenTrace {
         /* Conversation block */
         String line = scanner.nextLine();
         while (!line.equals("bye")) {
+            String[] stringParts = line.split(" ");
+            if (stringParts.length == 0) {
+                continue;
+            }
             if (line.equals("list")) {
                 System.out.println("    ____________________________________________________________\n");
-                int counter = 1;
-                for (String task : tasks) {
-                    System.out.println("    " + counter + ". " + task);
-                    counter++;
+                for (int i = 0; i < numberOfTasks; i++) {
+                    System.out.println("    " + (i + 1) + "." + tasks[i]);
                 }
                 System.out.println("    ____________________________________________________________\n");
             } 
+            else if (stringParts[0].equals("mark")) {
+                if (stringParts.length == 1) {
+                    System.out.println("    ____________________________________________________________\n");
+                    System.out.println("    Please provide the number of the task that you want to mark as done!");
+                    System.out.println("    ____________________________________________________________\n");
+                } else {
+                    int index = Integer.parseInt(stringParts[1]) - 1;
+                    tasks[index].mark();
+                    System.out.println("    ____________________________________________________________\n");
+                    System.out.println("    Nice! I've marked this task as done:\n");
+                    System.out.println("        " + tasks[index]);
+                    System.out.println("    ____________________________________________________________\n");
+                }
+            }
+            else if (stringParts[0].equals("unmark")) {
+                if (stringParts.length == 1) {
+                    System.out.println("    ____________________________________________________________\n");
+                    System.out.println("    Please provide the number of the task that you want to unmark!");
+                    System.out.println("    ____________________________________________________________\n");
+                } else {
+                    int index = Integer.parseInt(stringParts[1]) - 1;
+                    tasks[index].unmark();
+                    System.out.println("    ____________________________________________________________\n");
+                    System.out.println("    Nice! I've marked this task as done:\n");
+                    System.out.println("        " + tasks[index]);
+                    System.out.println("    ____________________________________________________________\n");
+                }
+            }
             else {
                 System.out.println("    ____________________________________________________________\n");
                 System.out.println("    added: " + line);
                 System.out.println("    ____________________________________________________________\n");
-                tasks.add(line);
+                tasks[numberOfTasks] = new Task(line);
+                numberOfTasks++;
             }
             line = scanner.nextLine();
         }
