@@ -7,8 +7,7 @@ public class GoldenTrace {
         int numberOfTasks = 0;
 
         /* Greeting */
-        String logo =
-                  "       _____ _______\n"
+        String logo = "       _____ _______\n"
                 + "      / ____|__   __|\n"
                 + "     | |  __   | |   \n"
                 + "     | | |_ |  | |   \n"
@@ -22,21 +21,20 @@ public class GoldenTrace {
         /* Conversation block */
         String line = scanner.nextLine();
         while (!line.equals("bye")) {
-            String[] stringParts = line.split(" ");
-            if (stringParts.length == 0) {
+            if (line.isEmpty()) {
                 continue;
             }
-            if (line.equals("list")) {
+            if (line.startsWith("list")) {
                 System.out.println("    ____________________________________________________________\n");
                 for (int i = 0; i < numberOfTasks; i++) {
                     System.out.println("    " + (i + 1) + "." + tasks[i]);
                 }
                 System.out.println("    ____________________________________________________________\n");
-            } 
-            else if (stringParts[0].equals("mark")) {
+            } else if (line.startsWith("mark")) {
+                String[] stringParts = line.split(" ");
                 if (stringParts.length == 1) {
                     System.out.println("    ____________________________________________________________\n");
-                    System.out.println("    Please provide the number of the task that you want to mark as done!");
+                    System.out.println("    Please follow the format 'mark [number]'!");
                     System.out.println("    ____________________________________________________________\n");
                 } else {
                     int index = Integer.parseInt(stringParts[1]) - 1;
@@ -46,11 +44,11 @@ public class GoldenTrace {
                     System.out.println("        " + tasks[index]);
                     System.out.println("    ____________________________________________________________\n");
                 }
-            }
-            else if (stringParts[0].equals("unmark")) {
-                if (stringParts.length == 1) {
+            } else if (line.startsWith("unmark")) {
+                String[] stringParts = line.split(" ");
+                if (stringParts.length != 2) {
                     System.out.println("    ____________________________________________________________\n");
-                    System.out.println("    Please provide the number of the task that you want to unmark!");
+                    System.out.println("    Please follow the format 'unmark [number]'!");
                     System.out.println("    ____________________________________________________________\n");
                 } else {
                     int index = Integer.parseInt(stringParts[1]) - 1;
@@ -60,13 +58,50 @@ public class GoldenTrace {
                     System.out.println("        " + tasks[index]);
                     System.out.println("    ____________________________________________________________\n");
                 }
-            }
-            else {
+            } else if (line.startsWith("todo")) {
+                tasks[numberOfTasks] = new ToDo(line.substring(5));
                 System.out.println("    ____________________________________________________________\n");
-                System.out.println("    added: " + line);
+                System.out.println("    Got it. I've added this task: ");
+                System.out.println("        " + tasks[numberOfTasks]);
+                System.out.println("    Now you have " + (numberOfTasks + 1) + " tasks in the list.");
                 System.out.println("    ____________________________________________________________\n");
-                tasks[numberOfTasks] = new Task(line);
                 numberOfTasks++;
+            } else if (line.startsWith("deadline")) {
+                String[] stringParts = line.split("/");
+                if (stringParts.length != 2 || !stringParts[1].startsWith("by")) {
+                    System.out.println("    ____________________________________________________________\n");
+                    System.out.println("    Please follow the format 'deadline [description] /by [deadline]'!");
+                    System.out.println("    ____________________________________________________________\n");
+                } else {
+                    tasks[numberOfTasks] = new Deadline(stringParts[0].substring(9), stringParts[1].substring(3));
+                    System.out.println("    ____________________________________________________________\n");
+                    System.out.println("    Got it. I've added this task: ");
+                    System.out.println("        " + tasks[numberOfTasks]);
+                    System.out.println("    Now you have " + (numberOfTasks + 1) + " tasks in the list.");
+                    System.out.println("    ____________________________________________________________\n");
+                    numberOfTasks++;
+                }
+            } else if (line.startsWith("event")) {
+                String[] stringParts = line.split("/");
+                if (stringParts.length != 3 || !stringParts[1].startsWith("from") || !stringParts[2].startsWith("to")) {
+                    System.out.println("    ____________________________________________________________\n");
+                    System.out.println(
+                            "    Please follow the format 'event [description] /from [starting time] /to [ending time]'!");
+                    System.out.println("    ____________________________________________________________\n");
+                } else {
+                    tasks[numberOfTasks] = new Event(stringParts[0].substring(6), stringParts[1].substring(5),
+                            stringParts[2].substring(3));
+                    System.out.println("    ____________________________________________________________\n");
+                    System.out.println("    Got it. I've added this task: ");
+                    System.out.println("        " + tasks[numberOfTasks]);
+                    System.out.println("    Now you have " + (numberOfTasks + 1) + " tasks in the list.");
+                    System.out.println("    ____________________________________________________________\n");
+                    numberOfTasks++;
+                }
+            } else {
+                System.out.println("    ____________________________________________________________\n");
+                System.out.println("    Sorry, I don't understand what you say! " + line);
+                System.out.println("    ____________________________________________________________\n");
             }
             line = scanner.nextLine();
         }
