@@ -1,3 +1,5 @@
+package goldentrace.type;
+
 public class Event extends Task {
     private String from;
     private String to;
