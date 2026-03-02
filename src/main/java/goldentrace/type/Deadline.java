@@ -1,3 +1,5 @@
+package goldentrace.type;
+
 public class Deadline extends Task {
     private String by;
 
