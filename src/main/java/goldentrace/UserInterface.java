@@ -16,16 +16,16 @@ public class UserInterface {
             + "     \\_____|  |_|   \n";
 
     public void greet() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n");
         System.out.println("    Hello! I'm\n" + LOGO);
         System.out.println("    What can I do for you?");
         System.out.println("    ____________________________________________________________\n");
     }
 
     public void sayGoodbye() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n");
         System.out.println("    Bye. Hope to see you again soon!");
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n");
     }
 
     public void sendError(String message) {
