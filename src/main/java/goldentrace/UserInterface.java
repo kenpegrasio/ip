@@ -62,4 +62,12 @@ public class UserInterface {
         System.out.println("        " + task);
         System.out.println("    ____________________________________________________________\n");
     }
+
+    public void showDeletedNotice(TaskList taskList, Task task) {
+        System.out.println("    ____________________________________________________________\n");
+        System.out.println("    Noted. I've removed this task: ");
+        System.out.println("        " + task);
+        System.out.println("    Now you have " + taskList.getSize() + " tasks in the list.");
+        System.out.println("    ____________________________________________________________\n");
+    }
 }

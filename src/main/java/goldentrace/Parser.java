@@ -2,6 +2,7 @@ package goldentrace;
 
 import goldentrace.command.Command;
 import goldentrace.command.DeadlineCommand;
+import goldentrace.command.DeleteCommand;
 import goldentrace.command.EventCommand;
 import goldentrace.command.ListCommand;
 import goldentrace.command.MarkCommand;
@@ -88,6 +89,18 @@ public class Parser {
                 }
                 return new EventCommand(taskList, ui, arguments[0], arguments[1].substring("from".length() + 1),
                         arguments[2].substring("to".length() + 1));
+            }
+
+            case "delete": {
+                if (tokens.length != 2) {
+                    throw new GoldenTraceException("Invalid format. Expected 'delete [number]'!");
+                }
+                try {
+                    int index = Integer.parseInt(tokens[1]) - 1;
+                    return new DeleteCommand(taskList, ui, index);
+                } catch (NumberFormatException ex) {
+                    throw new GoldenTraceException("Invalid format. Expected 'unmark [number]'!");
+                }
             }
 
             default:
