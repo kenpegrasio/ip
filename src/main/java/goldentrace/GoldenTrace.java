@@ -9,8 +9,14 @@ public class GoldenTrace {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        TaskList taskList = new TaskList();
+        Storage storage = new Storage();
         UserInterface ui = new UserInterface();
+        TaskList taskList = new TaskList();
+        try {
+            taskList = storage.load();
+        } catch (GoldenTraceException e) {
+            ui.sendError(e.getMessage());
+        }
         Parser parser = new Parser(taskList, ui);
 
         /* Conversation */
@@ -24,6 +30,7 @@ public class GoldenTrace {
             try {
                 Command command = parser.parse(input);
                 command.execute();
+                storage.store(taskList);
             } catch (GoldenTraceException e) {
                 ui.sendError(e.getMessage());
             }
