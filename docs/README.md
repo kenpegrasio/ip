@@ -5,15 +5,15 @@ GoldenTrace is a desktop task tracker for users who prefer working through a Com
 ## Quick start
 
 1. Ensure you have Java `17` or above installed.
-1. Download the latest `.jar` file from [here](https://github.com/kenpegrasio/ip/releases) to the folder you want to use as the app's home folder.
-1. Open a terminal in that folder.
-1. Run the application with:
+2. Download the latest `.jar` file from [here](https://github.com/kenpegrasio/ip/releases) to the folder you want to use as the app's home folder.
+3. Open a terminal in that folder.
+4. Run the application with:
 
 ```bash
 java -jar goldentrace.jar
 ```
 
-1. Type a command and press Enter to execute it.
+5. Type a command and press Enter to execute it.
 
 Some example commands you can try:
 
