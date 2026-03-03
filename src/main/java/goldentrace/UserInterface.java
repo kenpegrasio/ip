@@ -16,16 +16,16 @@ public class UserInterface {
             + "     \\_____|  |_|   \n";
 
     public void greet() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n");
         System.out.println("    Hello! I'm\n" + LOGO);
         System.out.println("    What can I do for you?");
         System.out.println("    ____________________________________________________________\n");
     }
 
     public void sayGoodbye() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n");
         System.out.println("    Bye. Hope to see you again soon!");
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n");
     }
 
     public void sendError(String message) {
@@ -60,6 +60,14 @@ public class UserInterface {
             System.out.println("    Nice! I've unmarked this task from done:\n");
         }
         System.out.println("        " + task);
+        System.out.println("    ____________________________________________________________\n");
+    }
+
+    public void showDeletedNotice(TaskList taskList, Task task) {
+        System.out.println("    ____________________________________________________________\n");
+        System.out.println("    Noted. I've removed this task: ");
+        System.out.println("        " + task);
+        System.out.println("    Now you have " + taskList.getSize() + " tasks in the list.");
         System.out.println("    ____________________________________________________________\n");
     }
 }
