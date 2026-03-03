@@ -12,12 +12,24 @@ import goldentrace.type.ToDo;
 
 import java.nio.file.Path;
 
+/**
+ * Handles loading tasks from disk and storing them back to disk.
+ */
 public class Storage {
     private static final String FILENAME = "data.txt";
 
+    /**
+     * Creates a storage handler backed by the default data file.
+     */
     public Storage() {
     }
 
+    /**
+     * Loads all persisted tasks from the storage file.
+     *
+     * @return Task list reconstructed from storage.
+     * @throws GoldenTraceException If the file cannot be created, read, or parsed.
+     */
     public TaskList load() throws GoldenTraceException {
         Path path = Paths.get(FILENAME);
         if (Files.notExists(path)) {
@@ -93,6 +105,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes the current task list to the storage file.
+     *
+     * @param taskList Task list to persist.
+     * @throws GoldenTraceException If the file cannot be created or written.
+     */
     public void store(TaskList taskList) throws GoldenTraceException {
         Path path = Paths.get(FILENAME);
         if (Files.notExists(path)) {

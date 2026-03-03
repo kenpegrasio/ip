@@ -4,17 +4,30 @@ import goldentrace.UserInterface;
 import goldentrace.type.Task;
 import goldentrace.type.TaskList;
 
+/**
+ * Searches the task list for tasks matching a keyword.
+ */
 public class FindCommand implements Command {
     private TaskList taskList;
     private UserInterface ui;
     private String description;
 
+    /**
+     * Creates a command that searches for matching tasks.
+     *
+     * @param taskList Task list to search.
+     * @param ui User interface used for feedback.
+     * @param description Keyword or phrase to search for.
+     */
     public FindCommand(TaskList taskList, UserInterface ui, String description) {
         this.taskList = taskList;
         this.ui = ui;
         this.description = description;
     }
 
+    /**
+     * Finds matching tasks and displays them.
+     */
     @Override
     public void execute() {
         TaskList matchedTasks = new TaskList();

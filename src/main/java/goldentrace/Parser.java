@@ -11,15 +11,31 @@ import goldentrace.command.TodoCommand;
 import goldentrace.command.UnmarkCommand;
 import goldentrace.type.TaskList;
 
+/**
+ * Parses raw user input into executable commands.
+ */
 public class Parser {
     private TaskList taskList;
     private UserInterface ui;
 
+    /**
+     * Creates a parser that works with the given task list and UI.
+     *
+     * @param taskList Task list to be mutated by parsed commands.
+     * @param ui User interface used by parsed commands.
+     */
     public Parser(TaskList taskList, UserInterface ui) {
         this.taskList = taskList;
         this.ui = ui;
     }
 
+    /**
+     * Parses user input into a command instance.
+     *
+     * @param input Raw user input.
+     * @return Parsed command ready for execution.
+     * @throws GoldenTraceException If the input format is invalid.
+     */
     public Command parse(String input) throws GoldenTraceException {
         if (input.trim().isEmpty()) {
             throw new GoldenTraceException("Please provide an input!");
