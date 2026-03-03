@@ -4,6 +4,7 @@ import goldentrace.command.Command;
 import goldentrace.command.DeadlineCommand;
 import goldentrace.command.DeleteCommand;
 import goldentrace.command.EventCommand;
+import goldentrace.command.FindCommand;
 import goldentrace.command.ListCommand;
 import goldentrace.command.MarkCommand;
 import goldentrace.command.TodoCommand;
@@ -101,6 +102,13 @@ public class Parser {
                 } catch (NumberFormatException ex) {
                     throw new GoldenTraceException("Invalid format. Expected 'unmark [number]'!");
                 }
+            }
+
+            case "find": {
+                if (tokens.length != 2) {
+                    throw new GoldenTraceException("Invalid format. Expected 'find [keywords]'!");
+                }
+                return new FindCommand(taskList, ui, tokens[1]);
             }
 
             default:

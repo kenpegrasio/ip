@@ -14,6 +14,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public boolean checkMatch(String keyword) {
+        return description.contains(keyword);
+    }
+
     public void mark() {
         this.isDone = true;
     }

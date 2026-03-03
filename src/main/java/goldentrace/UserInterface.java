@@ -52,6 +52,17 @@ public class UserInterface {
         System.out.println("    ____________________________________________________________\n");
     }
 
+    public void showMatchedTasks(TaskList taskList) {
+        System.out.println("    ____________________________________________________________\n");
+        if (taskList.getSize() == 0) {
+            System.out.println("    No matching tasks found!");
+        } else {
+            System.out.println("    Here are the matching tasks in your list: ");
+            System.out.print(taskList);
+        }
+        System.out.println("    ____________________________________________________________\n");
+    }
+
     public void showMarkUnmarkNotice(Task task, boolean isMark) {
         System.out.println("    ____________________________________________________________\n");
         if (isMark) {
